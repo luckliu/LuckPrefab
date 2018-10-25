@@ -213,10 +213,11 @@ cc.Class({
 
 			//最新的数据
 			for(var i = 0; i < this.randomLength;i++){
-				if(name.indexOf(i)>=0){
-					//name 里面的名字的顺序 和 this.countDownLeftTime这个存储数据是一致的
+				var index = nameArr.indexOf(i);
+				if(index>=0){
 					//所以temparr里面存的不是名字，是整个对象
-					tempArr.push(this.countDownLeftTime[this.countDownLeftTime.indexOf(i)]);
+					var item = this.countDownLeftTime[index];
+					tempArr.push(item);
 				}
 				//如果是乱序  那么要用原来的数组 减掉  最新的数据  得到废弃的数据，再去进行删除
 			}

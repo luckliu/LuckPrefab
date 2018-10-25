@@ -1,54 +1,52 @@
-2018-10-25T03:23:59.191Z - normal: Load ~/.CocosCreator/settings.json
-2018-10-25T03:23:59.195Z - normal: checking language setting...
-2018-10-25T03:23:59.195Z - normal: Language: zh
-2018-10-25T03:23:59.790Z - success: protocol editor-framework registered
-2018-10-25T03:23:59.790Z - success: protocol app registered
-2018-10-25T03:23:59.790Z - success: protocol theme registered
-2018-10-25T03:23:59.790Z - success: protocol packages registered
-2018-10-25T03:23:59.790Z - success: protocol unpack registerred
-2018-10-25T03:23:59.791Z - success: protocol disable-commonjs registerred
-2018-10-25T03:23:59.917Z - warn: 会话不存在或已过期
-2018-10-25T03:23:59.925Z - normal: connected!
-2018-10-25T03:23:59.926Z - normal: Check project /Users/datanghuyu/Desktop/prefabDemo
-2018-10-25T03:23:59.927Z - normal: Initializing Cocos2d
-2018-10-25T03:24:00.109Z - normal: Initializing Asset Database
-2018-10-25T03:24:00.138Z - success: protocol uuid registerred
-2018-10-25T03:24:00.138Z - success: protocol db registerred
-2018-10-25T03:24:00.138Z - success: protocol thumbnail registerred
-2018-10-25T03:24:00.138Z - normal: Loading editor/builtin packages
-2018-10-25T03:24:00.157Z - success: anysdk loaded
-2018-10-25T03:24:00.264Z - success: assets loaded
-2018-10-25T03:24:00.268Z - success: builder loaded
-2018-10-25T03:24:00.270Z - success: cocos-analytics loaded
-2018-10-25T03:24:00.274Z - success: console loaded
-2018-10-25T03:24:00.278Z - success: hierarchy loaded
-2018-10-25T03:24:00.282Z - success: inspector loaded
-2018-10-25T03:24:00.284Z - success: keystore loaded
-2018-10-25T03:24:00.288Z - success: node-library loaded
-2018-10-25T03:24:00.290Z - success: package-asset loaded
-2018-10-25T03:24:00.292Z - success: preferences loaded
-2018-10-25T03:24:00.295Z - success: project-exporter loaded
-2018-10-25T03:24:00.310Z - success: project-importer loaded
-2018-10-25T03:24:00.313Z - success: project-settings loaded
-2018-10-25T03:24:00.317Z - success: ui-kit loaded
-2018-10-25T03:24:00.321Z - success: ui-grid loaded
-2018-10-25T03:24:00.325Z - success: scene loaded
-2018-10-25T03:24:00.326Z - success: sprite-editor loaded
-2018-10-25T03:24:00.335Z - success: store loaded
-2018-10-25T03:24:00.347Z - success: timeline loaded
-2018-10-25T03:24:00.348Z - normal: Loading builtin packages
-2018-10-25T03:24:00.351Z - success: asset-db-debugger loaded
-2018-10-25T03:24:00.352Z - success: color-picker loaded
-2018-10-25T03:24:00.355Z - success: package-manager loaded
-2018-10-25T03:24:00.359Z - success: sdkbox loaded
-2018-10-25T03:24:00.364Z - success: tester loaded
-2018-10-25T03:24:00.368Z - success: ui-kit-preview-extra loaded
-2018-10-25T03:24:00.371Z - success: ui-kit-preview loaded
-2018-10-25T03:24:00.375Z - success: ui-tree loaded
-2018-10-25T03:24:01.284Z - normal: Initializing project /Users/datanghuyu/Desktop/prefabDemo
-2018-10-25T03:24:01.286Z - normal: Loading packages
-2018-10-25T03:24:01.291Z - normal: Watching packages
-2018-10-25T03:24:01.302Z - normal: Run Application
-2018-10-25T03:24:02.487Z - success: preview server running at http://localhost:7457
-2018-10-25T03:24:05.637Z - warn: 会话不存在或已过期
-2018-10-25T03:24:06.897Z - normal: 1.8.2
+2018-10-25T07:13:33.895Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-25T07:13:33.899Z - normal: checking language setting...
+2018-10-25T07:13:33.899Z - normal: Language: zh
+2018-10-25T07:13:34.516Z - success: protocol editor-framework registered
+2018-10-25T07:13:34.516Z - success: protocol app registered
+2018-10-25T07:13:34.516Z - success: protocol theme registered
+2018-10-25T07:13:34.516Z - success: protocol packages registered
+2018-10-25T07:13:34.516Z - success: protocol unpack registerred
+2018-10-25T07:13:34.517Z - success: protocol disable-commonjs registerred
+2018-10-25T07:13:34.630Z - normal: connected!
+2018-10-25T07:13:34.634Z - normal: Check project /Users/datanghuyu/Desktop/LuckPrefab
+2018-10-25T07:13:34.636Z - normal: Initializing Cocos2d
+2018-10-25T07:13:34.821Z - normal: Initializing Asset Database
+2018-10-25T07:13:34.849Z - success: protocol uuid registerred
+2018-10-25T07:13:34.849Z - success: protocol db registerred
+2018-10-25T07:13:34.849Z - success: protocol thumbnail registerred
+2018-10-25T07:13:34.849Z - normal: Loading editor/builtin packages
+2018-10-25T07:13:34.869Z - success: anysdk loaded
+2018-10-25T07:13:34.982Z - success: assets loaded
+2018-10-25T07:13:34.985Z - success: builder loaded
+2018-10-25T07:13:34.987Z - success: cocos-analytics loaded
+2018-10-25T07:13:34.992Z - success: console loaded
+2018-10-25T07:13:34.995Z - success: hierarchy loaded
+2018-10-25T07:13:34.999Z - success: inspector loaded
+2018-10-25T07:13:35.001Z - success: keystore loaded
+2018-10-25T07:13:35.005Z - success: node-library loaded
+2018-10-25T07:13:35.007Z - success: package-asset loaded
+2018-10-25T07:13:35.008Z - success: preferences loaded
+2018-10-25T07:13:35.011Z - success: project-exporter loaded
+2018-10-25T07:13:35.026Z - success: project-importer loaded
+2018-10-25T07:13:35.029Z - success: project-settings loaded
+2018-10-25T07:13:35.033Z - success: ui-kit loaded
+2018-10-25T07:13:35.038Z - success: ui-grid loaded
+2018-10-25T07:13:35.042Z - success: scene loaded
+2018-10-25T07:13:35.043Z - success: sprite-editor loaded
+2018-10-25T07:13:35.059Z - success: store loaded
+2018-10-25T07:13:35.065Z - success: timeline loaded
+2018-10-25T07:13:35.065Z - normal: Loading builtin packages
+2018-10-25T07:13:35.069Z - success: asset-db-debugger loaded
+2018-10-25T07:13:35.069Z - success: color-picker loaded
+2018-10-25T07:13:35.073Z - success: package-manager loaded
+2018-10-25T07:13:35.077Z - success: sdkbox loaded
+2018-10-25T07:13:35.081Z - success: tester loaded
+2018-10-25T07:13:35.086Z - success: ui-kit-preview-extra loaded
+2018-10-25T07:13:35.089Z - success: ui-kit-preview loaded
+2018-10-25T07:13:35.092Z - success: ui-tree loaded
+2018-10-25T07:13:36.035Z - normal: Initializing project /Users/datanghuyu/Desktop/LuckPrefab
+2018-10-25T07:13:36.037Z - normal: Loading packages
+2018-10-25T07:13:36.042Z - normal: Watching packages
+2018-10-25T07:13:36.053Z - normal: Run Application
+2018-10-25T07:13:36.821Z - success: preview server running at http://localhost:7456
+2018-10-25T07:13:41.201Z - normal: 1.8.2
