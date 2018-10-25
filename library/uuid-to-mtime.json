@@ -84,11 +84,6 @@
     "meta": 1539138002000,
     "relativePath": "res/jiesuan_shuzi_100.png"
   },
-  "d89f60c2-2713-4594-b450-7f5915ce31f0": {
-    "asset": 1540436383000,
-    "meta": 1540437842000,
-    "relativePath": "Script/gameScene.js"
-  },
   "71561142-4c83-4933-afca-cb7a17f67053": {
     "asset": 1520237598000,
     "meta": 1540451616000,
@@ -273,5 +268,15 @@
     "asset": 1520237598000,
     "meta": 1540451616000,
     "relativePath": "prefab/webview.prefab"
+  },
+  "d89f60c2-2713-4594-b450-7f5915ce31f0": {
+    "asset": 1540451632000,
+    "meta": 1540451812000,
+    "relativePath": "Script/gameScene.js"
+  },
+  "7b677efe-4b62-425d-89fc-bda0b81c897c": {
+    "asset": 1540451817000,
+    "meta": 1540452084000,
+    "relativePath": "Script/prefab.js"
   }
 }

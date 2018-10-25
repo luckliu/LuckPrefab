@@ -50,3 +50,13 @@
 2018-10-25T07:13:36.053Z - normal: Run Application
 2018-10-25T07:13:36.821Z - success: preview server running at http://localhost:7456
 2018-10-25T07:13:41.201Z - normal: 1.8.2
+2018-10-25T07:21:15.947Z - error: [db-task][sync-changes] Failed to delete asset /Users/datanghuyu/Desktop/LuckPrefab/assets/Script/NewScript.js
+    at s.AssetDB.error (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/lib/utils.js:1:2578)
+    at Tasks.clearImports (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/core/watch.js:1:442)
+    at Object.Tasks.clearImports (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/lib/tasks.js:1:22895)
+    at e (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/core/watch.js:1:398)
+    at /Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:181:20
+    at iterate (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:262:13)
+    at Object.async.forEachOfSeries.async.eachOfSeries (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:281:9)
+    at Object.async.forEachSeries.async.eachSeries (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:214:22)
+    at Async.series.t (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/core/watch.js:1:1046)
