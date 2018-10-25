@@ -3,6 +3,12 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+
+        itemScrollView:{
+            type:cc.Node,
+            default:null,
+        },
+
         //预制体
         prefabItem:{
             type:cc.Prefab,
@@ -14,65 +20,76 @@ cc.Class({
             type:cc.Node,
             default:null,
         },
-
     },
 
     start () {
         //只初始化一次的数据
-		this.initDataOnlyOnce();
-
+        this.initDataOnlyOnce();
+        
 		//初始化数据
-		this.initData();
-		this.initPrefabItemCachePool();
-		this.reLoadData(this.start_index);
-		this.node.getChildByName("testScroll").on("scroll-ended", this.on_scroll_ended.bind(this), this);
+        this.initData();
+        
+        //预制体缓存池，只初始化一次
+        this.initPrefabItemCachePool();
+
+        //装载数据 从0开始
+        this.reLoadData(this.start_index);
+        
+        //监听滑动结束事件
+        this.itemScrollView.on("scroll-ended", this.scrollEnded.bind(this), this);
+        
+        //启动定时器
 		this.beginCountDown();
     },
 
     initDataOnlyOnce(){
         this.countDownLeftTime = [];                                    //记录每个item剩余时间的大数组 
         this.initStart_Y = this.itemContent.y;                          //列表content的初始y的位置 
-		this.prefabItemCachePool = [];                                  //所有预制体的存放池
+        this.prefabItemCachePool = [];                                  //所有预制体的存放池
+        this.itemContentHeight = this.itemContent._contentSize.height   //content高度
 		this.itemHeight = this.prefabItem.data._contentSize.height		//预制体的高度
     },
 
-    //请求数据
+    //tableview 刷新数据
     reLoadData(start_index){
-		this.start_index = start_index;
-		console.log("loadData,start_index==",start_index);
-		console.log("this.countDownLeftTime.length==",this.countDownLeftTime.length);
+        this.start_index = start_index;
         for(var i = 0; i < this.prefabItemCachePool.length; i ++) {
-			var friendItemPrefab = this.prefabItemCachePool[i];
+            var friendItemPrefab = this.prefabItemCachePool[i];
+            //注意替换节点
 			var label = friendItemPrefab.getChildByName("name").getComponent(cc.Label);
-			var inviteLab = friendItemPrefab.getChildByName("invitebtn").getChildByName("invite").getComponent(cc.Label);
-			friendItemPrefab.physicalLocation = start_index+i;
-			console.log("loadData,start_index+i==",start_index+i);
+            var inviteLab = friendItemPrefab.getChildByName("invitebtn").getChildByName("invite").getComponent(cc.Label);
+            
+            friendItemPrefab.physicalLocation = start_index+i;
+            
 			if(start_index + i >= this.countDownLeftTime.length){
-				console.log("i===",i);
 				friendItemPrefab.active = false;
 				continue;
-			}
+            }
+            
 			friendItemPrefab.active = true;
-			var itemTemp = this.countDownLeftTime[start_index+i];
-			console.log("target==",friendItemPrefab);
+            var itemTemp = this.countDownLeftTime[start_index+i];
+            
 			//赋值
 			if(itemTemp.isClicked){
 				inviteLab.string = itemTemp.time;
 			}else{
 				inviteLab.string = "邀请";
-			}
+            }
+
+            //this.prefabData 对象取到name
 			label.string = this.prefabData[start_index+i];
-			
         }
 	},
 
+    //更新UI
 	upDateLableString(item){
-		var self = this;
+        var self = this;
+        //定时器2，做赋值操作
 		this.schedule(function(){
 			var index = item.physicalLocation;
-			console.log("physicalLocation==",index);
 			var tempItem = self.countDownLeftTime[index];
 			if(tempItem.isClicked){
+                //注意替换节点
 				item.getChildByName("invitebtn").getChildByName("invite").getComponent(cc.Label).string = tempItem.time;
 			}else{
 				item.getChildByName("invitebtn").getChildByName("invite").getComponent(cc.Label).string = "邀请";
@@ -82,72 +99,81 @@ cc.Class({
 		},1);
 	},
 
-	on_scroll_ended(){
-		this.scrollveiw_load_recode();
+	scrollEnded(){
+		this.scrollveiwDidScrolled();
 		this.node.getChildByName("testScroll").elastic = true;
-	
 	},
 
-	scrollveiw_load_recode(){
-		//因为只拿了一个item复用，所以滑动的范围只要大于1就要重新加载
-		if(this.start_index + this.page_num < this.prefabData.length&&this.itemContent.y - this.start_y >= this.itemHeight){
-			//如果滑动的范围大于了1个item的高度，就要去加载新的数据
-			//每次加载一个数据
 
-			if(this.node.getChildByName("testScroll")._autoScrolling){
-				this.node.getChildByName("testScroll").elastic = false;
-				return;
-			}
+	scrollveiwDidScrolled(){
+        //因为只拿了一个item复用，所以滑动的范围只要大于1就要重新加载
+        //向下滑
+        var isScrollDown = (this.start_index + this.page_num < this.prefabData.length&&this.itemContent.y - this.start_y >= this.itemHeight);
+		if(isScrollDown){
+            this.scrollDown();
+            return;
+        }
 
-			var down_loaded = 1;
-			this.start_index += down_loaded;
-
-			//如果往后再加载一个数据就超过了总的数据长度
-			console.log("start_index==",this.start_index);
-			console.log("this.prefabData.length==",this.prefabData.length);
-			if(this.start_index + this.page_num > this.prefabData.length){
-				//down_loaded要剪掉超过的项
-				var out_len = (this.start_index + this.page_num) - this.prefabData.length; //超过的长度
-				down_loaded -= out_len;
-				this.start_index -= out_len;
-				console.log("out out out out !!");
-			}
-			this.reLoadData(this.start_index);
-			this.itemContent.y -= down_loaded*this.itemHeight;
-			return;
+        //向上滑
+        var isScrollUp = (this.start_index > 0&& this.start_y - this.itemContent.y >= 0);
+		if(isScrollUp){
+			this.scrollUp();
 		}
+    },
+    
+    scrollDown(){
+        //如果滑动的范围大于了1个item的高度，就要去加载新的数据
+        //每次加载一个数据
 
-		//向上加载
-		if(this.start_index > 0&& this.start_y - this.itemContent.y >= 0){
-			if(this.node.getChildByName("testScroll")._autoScrolling){
-				this.node.getChildByName("testScroll").elastic = false;
-				return;
-			}
-			var up_loaded = 1;
-			this.start_index -= up_loaded;
-			if(this.start.index < 0){
-				up_loaded += this.start_index;
-				this.start_index = 0;
-				console.log("我总觉着这个地方不会走！！");
-			}
+        if(this.itemScrollView._autoScrolling){
+            this.itemScrollView.elastic = false;
+            return;
+        }
 
-			this.reLoadData(this.start_index);
-			this.itemContent.y += up_loaded*this.itemHeight;
-		}
-	},
+        var down_loaded = 1;
+        this.start_index += down_loaded;
+
+        //如果往后再加载一个数据就超过了总的数据长度
+        console.log("start_index==",this.start_index);
+        console.log("this.prefabData.length==",this.prefabData.length);
+        if(this.start_index + this.page_num > this.prefabData.length){
+            //down_loaded要剪掉超过的项
+            var out_len = (this.start_index + this.page_num) - this.prefabData.length; //超过的长度
+            down_loaded -= out_len;
+            this.start_index -= out_len;
+            console.log("out out out out !!");
+        }
+        this.reLoadData(this.start_index);
+        this.itemContent.y -= down_loaded*this.itemHeight;            
+    },
+
+    scrollUp(){
+        if(this.itemScrollView._autoScrolling){
+            this.itemScrollView.elastic = false;
+            return;
+        }
+        var up_loaded = 1;
+        this.start_index -= up_loaded;
+        if(this.start.index < 0){
+            up_loaded += this.start_index;
+            this.start_index = 0;
+        }
+        this.reLoadData(this.start_index);
+        this.itemContent.y += up_loaded*this.itemHeight;
+    },
 
     showClick(){
-		this.node.getChildByName("testScroll").active = true;
+		this.itemScrollView.active = true;
 		//重新获取数据
 		this.initData();
 		this.reLoadData(0);
     },
 
     hiddeClick(){
-		this.node.getChildByName("testScroll").active = false;
+        this.itemScrollView.active = false;
     },
 
-	//一个定时器
+	//定时器
     beginCountDown(){
 		this.countDownCallBack = function(){
 			for(var i = 0; i < this.countDownLeftTime.length;i++){
@@ -162,7 +188,31 @@ cc.Class({
 			}
 		};
 		this.schedule(this.countDownCallBack,1);
-		
+    },
+
+    initPrefabItemCachePool:function(){
+		//计算并且初始化需要的最多的预制体个数
+		var self = this;
+        this.page_num = Math.floor(this.itemContentHeight/this.itemHeight)+1; 
+        
+		for(let i = 0; i < this.page_num;i++){
+
+			let prefabItem = cc.instantiate(this.prefabItem);
+            prefabItem.parent = this.itemContent;
+            
+            //这个地方注意下预制体的结构，自己获取要去监听的部分
+			prefabItem.getChildByName("invitebtn").on(cc.Node.EventType.TOUCH_END, function(touchEvent){
+				let index = prefabItem.physicalLocation;
+				let tempItem = self.countDownLeftTime[index];
+				tempItem.isClicked = true;
+				self.upDateLableString(prefabItem);				
+			}, prefabItem.getChildByName("invitebtn"));
+			this.prefabItemCachePool.push(prefabItem);	
+        }
+    },
+
+    update (dt) {
+		this.scrollveiwDidScrolled();
 	},
 	
     /**
@@ -290,27 +340,4 @@ cc.Class({
         return newNameArr;
     },
     
-	initPrefabItemCachePool:function(){
-		//计算并且初始化需要的最多的预制体个数
-		var self = this;
-		this.page_num = Math.floor(this.itemContent._contentSize.height/this.itemHeight)+1; 
-		for(let i = 0; i < this.page_num;i++){
-			let prefabItem = cc.instantiate(this.prefabItem);
-			prefabItem.parent = this.itemContent;
-			prefabItem.getChildByName("invitebtn").on(cc.Node.EventType.TOUCH_END, function(touchEvent){
-				let index = prefabItem.physicalLocation;
-				let tempItem = self.countDownLeftTime[index];
-				tempItem.isClicked = true;
-				self.upDateLableString(prefabItem);
-				console.log("prefabItem is clicked!");
-				
-			}, prefabItem.getChildByName("invitebtn"));
-			this.prefabItemCachePool.push(prefabItem);	
-        }
-        console.log("prefabItemCachePool length==",this.prefabItemCachePool.length);
-    },
-
-    update (dt) {
-		this.scrollveiw_load_recode();
-	},
 });

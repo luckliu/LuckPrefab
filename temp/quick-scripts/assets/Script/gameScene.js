@@ -115,7 +115,7 @@ cc.Class({
 			}
 			this.loadData(this.start_index);
 			this.itemContent.y -= down_loaded * this.itemHeight;
-			return;
+			// return;
 		}
 
 		//向上加载
