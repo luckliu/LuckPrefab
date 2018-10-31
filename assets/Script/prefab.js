@@ -30,10 +30,10 @@ cc.Class({
         }
 
         //只初始化一次的数据
-        this.initDataOnlyOnce();
+        this._initDataOnlyOnce();
         
 		//初始化数据
-        this.initData();
+        this._initData();
         
         //预制体缓存池，只初始化一次
         this.initPrefabItemCachePool();
@@ -45,10 +45,10 @@ cc.Class({
         this.itemScrollView.on("scroll-ended", this.scrollEnded.bind(this), this);
         
         //启动定时器
-		this.beginCountDown();
+		this._beginCountDown();
     },
 
-    initDataOnlyOnce(){
+    _initDataOnlyOnce(){
         if(cc.jsInstance.countDownLeftTime){
             this.countDownLeftTime = cc.jsInstance.countDownLeftTime.slice(0);
         }else{
@@ -179,7 +179,7 @@ cc.Class({
     showClick(){
 		this.itemScrollView.active = true;
 		//重新获取数据
-		this.initData();
+		this._initData();
     },
 
     hiddeClick(){
@@ -187,7 +187,7 @@ cc.Class({
     },
 
 	//定时器
-    beginCountDown(){
+    _beginCountDown(){
         this.countDownCallBack = function(){
             if(cc.jsInstance.countDownLeftTime){
                 for(var i = 0; i < cc.jsInstance.countDownLeftTime.length;i++){
@@ -233,7 +233,7 @@ cc.Class({
     /**
      * 每次重新拉取新的数据都进行的初始化操作
      */
-	initData(){
+	_initData(){
         //this.initStart_Y 这个只初始化了一次所以是固定值 
         //防止误修改
 		this.start_y = this.initStart_Y; 
@@ -248,7 +248,7 @@ cc.Class({
         this.getData();
     },
 
-    initCountDownLeftTimeArr(){
+    _initCountDownLeftTimeArr(){
         this.countDownLeftTime = [];
         for(var i = 0; i < this.prefabData.length;i++){
             var temp ={
@@ -274,14 +274,14 @@ cc.Class({
         }
 
         //获取新数据，更新数据
-        this.updatePrefabData();
+        this._updatePrefabData();
     },
 
     //更新数据 这个地方自己去处理数据
-    updatePrefabData(){
+    _updatePrefabData(){
         
         //每次都替换，然后从大的存好了的数据里进行替换对象
-        this.initCountDownLeftTimeArr();      
+        this._initCountDownLeftTimeArr();      
 
        //首次进入
        if(!cc.jsInstance.countDownLeftTime){
@@ -290,7 +290,7 @@ cc.Class({
 
            //所有的名字数组
            var allNames = [];
-           allNames = this.setNameArr(allNames);
+           allNames = this._setNameArr(allNames);
            //如果总的数据里面有这个数据，那么countDownlefttime中的数据直接从数据里面取就好了
            //如果没有，那么更新总的数据库 ，不用替换
            for(var i = 0; i < this.countDownLeftTime.length;i++){
@@ -307,7 +307,7 @@ cc.Class({
        this.reLoadData(0);
     },
 
-    setNameArr(nameArr){
+    _setNameArr(nameArr){
         for(var i = 0; i < cc.jsInstance.countDownLeftTime.length;i++){
             var item = cc.jsInstance.countDownLeftTime[i];
             nameArr.push(item.name);
