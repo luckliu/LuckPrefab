@@ -1,62 +1,52 @@
-2018-10-25T07:13:33.895Z - normal: Load ~/.CocosCreator/settings.json
-2018-10-25T07:13:33.899Z - normal: checking language setting...
-2018-10-25T07:13:33.899Z - normal: Language: zh
-2018-10-25T07:13:34.516Z - success: protocol editor-framework registered
-2018-10-25T07:13:34.516Z - success: protocol app registered
-2018-10-25T07:13:34.516Z - success: protocol theme registered
-2018-10-25T07:13:34.516Z - success: protocol packages registered
-2018-10-25T07:13:34.516Z - success: protocol unpack registerred
-2018-10-25T07:13:34.517Z - success: protocol disable-commonjs registerred
-2018-10-25T07:13:34.630Z - normal: connected!
-2018-10-25T07:13:34.634Z - normal: Check project /Users/datanghuyu/Desktop/LuckPrefab
-2018-10-25T07:13:34.636Z - normal: Initializing Cocos2d
-2018-10-25T07:13:34.821Z - normal: Initializing Asset Database
-2018-10-25T07:13:34.849Z - success: protocol uuid registerred
-2018-10-25T07:13:34.849Z - success: protocol db registerred
-2018-10-25T07:13:34.849Z - success: protocol thumbnail registerred
-2018-10-25T07:13:34.849Z - normal: Loading editor/builtin packages
-2018-10-25T07:13:34.869Z - success: anysdk loaded
-2018-10-25T07:13:34.982Z - success: assets loaded
-2018-10-25T07:13:34.985Z - success: builder loaded
-2018-10-25T07:13:34.987Z - success: cocos-analytics loaded
-2018-10-25T07:13:34.992Z - success: console loaded
-2018-10-25T07:13:34.995Z - success: hierarchy loaded
-2018-10-25T07:13:34.999Z - success: inspector loaded
-2018-10-25T07:13:35.001Z - success: keystore loaded
-2018-10-25T07:13:35.005Z - success: node-library loaded
-2018-10-25T07:13:35.007Z - success: package-asset loaded
-2018-10-25T07:13:35.008Z - success: preferences loaded
-2018-10-25T07:13:35.011Z - success: project-exporter loaded
-2018-10-25T07:13:35.026Z - success: project-importer loaded
-2018-10-25T07:13:35.029Z - success: project-settings loaded
-2018-10-25T07:13:35.033Z - success: ui-kit loaded
-2018-10-25T07:13:35.038Z - success: ui-grid loaded
-2018-10-25T07:13:35.042Z - success: scene loaded
-2018-10-25T07:13:35.043Z - success: sprite-editor loaded
-2018-10-25T07:13:35.059Z - success: store loaded
-2018-10-25T07:13:35.065Z - success: timeline loaded
-2018-10-25T07:13:35.065Z - normal: Loading builtin packages
-2018-10-25T07:13:35.069Z - success: asset-db-debugger loaded
-2018-10-25T07:13:35.069Z - success: color-picker loaded
-2018-10-25T07:13:35.073Z - success: package-manager loaded
-2018-10-25T07:13:35.077Z - success: sdkbox loaded
-2018-10-25T07:13:35.081Z - success: tester loaded
-2018-10-25T07:13:35.086Z - success: ui-kit-preview-extra loaded
-2018-10-25T07:13:35.089Z - success: ui-kit-preview loaded
-2018-10-25T07:13:35.092Z - success: ui-tree loaded
-2018-10-25T07:13:36.035Z - normal: Initializing project /Users/datanghuyu/Desktop/LuckPrefab
-2018-10-25T07:13:36.037Z - normal: Loading packages
-2018-10-25T07:13:36.042Z - normal: Watching packages
-2018-10-25T07:13:36.053Z - normal: Run Application
-2018-10-25T07:13:36.821Z - success: preview server running at http://localhost:7456
-2018-10-25T07:13:41.201Z - normal: 1.8.2
-2018-10-25T07:21:15.947Z - error: [db-task][sync-changes] Failed to delete asset /Users/datanghuyu/Desktop/LuckPrefab/assets/Script/NewScript.js
-    at s.AssetDB.error (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/lib/utils.js:1:2578)
-    at Tasks.clearImports (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/core/watch.js:1:442)
-    at Object.Tasks.clearImports (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/lib/tasks.js:1:22895)
-    at e (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/core/watch.js:1:398)
-    at /Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:181:20
-    at iterate (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:262:13)
-    at Object.async.forEachOfSeries.async.eachOfSeries (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:281:9)
-    at Object.async.forEachSeries.async.eachSeries (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/async/lib/async.js:214:22)
-    at Async.series.t (/Applications/CocosCreator.app/Contents/Resources/app.asar/asset-db/core/watch.js:1:1046)
+2018-10-31T03:54:43.704Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-31T03:54:43.707Z - normal: checking language setting...
+2018-10-31T03:54:43.707Z - normal: Language: zh
+2018-10-31T03:54:44.482Z - success: protocol editor-framework registered
+2018-10-31T03:54:44.482Z - success: protocol app registered
+2018-10-31T03:54:44.482Z - success: protocol theme registered
+2018-10-31T03:54:44.482Z - success: protocol packages registered
+2018-10-31T03:54:44.482Z - success: protocol unpack registerred
+2018-10-31T03:54:44.483Z - success: protocol disable-commonjs registerred
+2018-10-31T03:54:44.656Z - normal: connected!
+2018-10-31T03:54:44.660Z - normal: Check project /Users/datanghuyu/Desktop/LuckPrefab
+2018-10-31T03:54:44.662Z - normal: Initializing Cocos2d
+2018-10-31T03:54:44.905Z - normal: Initializing Asset Database
+2018-10-31T03:54:44.938Z - success: protocol uuid registerred
+2018-10-31T03:54:44.938Z - success: protocol db registerred
+2018-10-31T03:54:44.939Z - success: protocol thumbnail registerred
+2018-10-31T03:54:44.939Z - normal: Loading editor/builtin packages
+2018-10-31T03:54:44.960Z - success: anysdk loaded
+2018-10-31T03:54:45.074Z - success: assets loaded
+2018-10-31T03:54:45.079Z - success: builder loaded
+2018-10-31T03:54:45.081Z - success: cocos-analytics loaded
+2018-10-31T03:54:45.086Z - success: console loaded
+2018-10-31T03:54:45.090Z - success: hierarchy loaded
+2018-10-31T03:54:45.094Z - success: inspector loaded
+2018-10-31T03:54:45.095Z - success: keystore loaded
+2018-10-31T03:54:45.099Z - success: node-library loaded
+2018-10-31T03:54:45.101Z - success: package-asset loaded
+2018-10-31T03:54:45.103Z - success: preferences loaded
+2018-10-31T03:54:45.107Z - success: project-exporter loaded
+2018-10-31T03:54:45.124Z - success: project-importer loaded
+2018-10-31T03:54:45.128Z - success: project-settings loaded
+2018-10-31T03:54:45.139Z - success: ui-kit loaded
+2018-10-31T03:54:45.143Z - success: ui-grid loaded
+2018-10-31T03:54:45.147Z - success: scene loaded
+2018-10-31T03:54:45.148Z - success: sprite-editor loaded
+2018-10-31T03:54:45.157Z - success: store loaded
+2018-10-31T03:54:45.163Z - success: timeline loaded
+2018-10-31T03:54:45.163Z - normal: Loading builtin packages
+2018-10-31T03:54:45.167Z - success: asset-db-debugger loaded
+2018-10-31T03:54:45.168Z - success: color-picker loaded
+2018-10-31T03:54:45.171Z - success: package-manager loaded
+2018-10-31T03:54:45.176Z - success: sdkbox loaded
+2018-10-31T03:54:45.180Z - success: tester loaded
+2018-10-31T03:54:45.184Z - success: ui-kit-preview-extra loaded
+2018-10-31T03:54:45.189Z - success: ui-kit-preview loaded
+2018-10-31T03:54:45.192Z - success: ui-tree loaded
+2018-10-31T03:54:46.173Z - normal: Initializing project /Users/datanghuyu/Desktop/LuckPrefab
+2018-10-31T03:54:46.175Z - normal: Loading packages
+2018-10-31T03:54:46.179Z - normal: Watching packages
+2018-10-31T03:54:46.191Z - normal: Run Application
+2018-10-31T03:54:47.071Z - success: preview server running at http://localhost:7456
+2018-10-31T03:54:51.370Z - normal: 1.8.2

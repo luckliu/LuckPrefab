@@ -1003,7 +1003,7 @@
     "target": {
       "__id__": 2
     },
-    "component": "gameScene",
+    "component": "prefab",
     "handler": "showClick",
     "customEventData": ""
   },
@@ -1239,7 +1239,7 @@
     "target": {
       "__id__": 2
     },
-    "component": "gameScene",
+    "component": "prefab",
     "handler": "hiddeClick",
     "customEventData": ""
   },

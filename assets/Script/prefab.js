@@ -4,6 +4,7 @@ cc.Class({
 
     properties: {
 
+        //需要挂载上的scorllview
         itemScrollView:{
             type:cc.Node,
             default:null,
@@ -23,6 +24,11 @@ cc.Class({
     },
 
     start () {
+
+        cc.jsInstance = {
+
+        }
+
         //只初始化一次的数据
         this.initDataOnlyOnce();
         
@@ -43,7 +49,11 @@ cc.Class({
     },
 
     initDataOnlyOnce(){
-        this.countDownLeftTime = [];                                    //记录每个item剩余时间的大数组 
+        if(cc.jsInstance.countDownLeftTime){
+            this.countDownLeftTime = cc.jsInstance.countDownLeftTime.slice(0);
+        }else{
+            this.countDownLeftTime = [];                                    //记录每个item剩余时间的大数组 
+        }
         this.initStart_Y = this.itemContent.y;                          //列表content的初始y的位置 
         this.prefabItemCachePool = [];                                  //所有预制体的存放池
         this.itemContentHeight = this.itemContent._contentSize.height   //content高度
@@ -61,23 +71,24 @@ cc.Class({
             
             friendItemPrefab.physicalLocation = start_index+i;
             
-			if(start_index + i >= this.countDownLeftTime.length){
-				friendItemPrefab.active = false;
+			if(start_index + i < this.countDownLeftTime.length-1){
+				friendItemPrefab.active = true;
+                var itemTemp = this.countDownLeftTime[start_index+i];
+                
+                //赋值
+                if(itemTemp.isClicked){
+                    inviteLab.string = itemTemp.time;
+                }else{
+                    inviteLab.string = "邀请";
+                }
+                //this.prefabData 对象取到name
+                label.string = this.prefabData[start_index+i];
+            }else{
+                friendItemPrefab.active = false;
 				continue;
             }
             
-			friendItemPrefab.active = true;
-            var itemTemp = this.countDownLeftTime[start_index+i];
-            
-			//赋值
-			if(itemTemp.isClicked){
-				inviteLab.string = itemTemp.time;
-			}else{
-				inviteLab.string = "邀请";
-            }
-
-            //this.prefabData 对象取到name
-			label.string = this.prefabData[start_index+i];
+			
         }
 	},
 
@@ -100,28 +111,28 @@ cc.Class({
 	},
 
 	scrollEnded(){
-		this.scrollveiwDidScrolled();
+		this._scrollveiwDidScrolled();
 		this.node.getChildByName("testScroll").elastic = true;
 	},
 
 
-	scrollveiwDidScrolled(){
+	_scrollveiwDidScrolled(){
         //因为只拿了一个item复用，所以滑动的范围只要大于1就要重新加载
         //向下滑
         var isScrollDown = (this.start_index + this.page_num < this.prefabData.length&&this.itemContent.y - this.start_y >= this.itemHeight);
 		if(isScrollDown){
-            this.scrollDown();
+            this._scrollDown();
             return;
         }
 
         //向上滑
         var isScrollUp = (this.start_index > 0&& this.start_y - this.itemContent.y >= 0);
 		if(isScrollUp){
-			this.scrollUp();
+			this._scrollUp();
 		}
     },
     
-    scrollDown(){
+    _scrollDown(){
         //如果滑动的范围大于了1个item的高度，就要去加载新的数据
         //每次加载一个数据
 
@@ -147,7 +158,7 @@ cc.Class({
         this.itemContent.y -= down_loaded*this.itemHeight;            
     },
 
-    scrollUp(){
+    _scrollUp(){
         if(this.itemScrollView._autoScrolling){
             this.itemScrollView.elastic = false;
             return;
@@ -162,11 +173,13 @@ cc.Class({
         this.itemContent.y += up_loaded*this.itemHeight;
     },
 
+    /**
+     * 列表的显示与隐藏
+     */
     showClick(){
 		this.itemScrollView.active = true;
 		//重新获取数据
 		this.initData();
-		this.reLoadData(0);
     },
 
     hiddeClick(){
@@ -175,17 +188,19 @@ cc.Class({
 
 	//定时器
     beginCountDown(){
-		this.countDownCallBack = function(){
-			for(var i = 0; i < this.countDownLeftTime.length;i++){
-				var tempItem = this.countDownLeftTime[i];
-				if(tempItem.isClicked){
-					tempItem.time--;
-					if(tempItem.time === 0){
-						tempItem.time = 120;
-						tempItem.isClicked = false;
-					}
-				}
-			}
+        this.countDownCallBack = function(){
+            if(cc.jsInstance.countDownLeftTime){
+                for(var i = 0; i < cc.jsInstance.countDownLeftTime.length;i++){
+                    var tempItem = cc.jsInstance.countDownLeftTime[i];
+                    if(tempItem.isClicked){
+                        tempItem.time--;
+                        if(tempItem.time === 0){
+                            tempItem.time = 120;
+                            tempItem.isClicked = false;
+                        }
+                    }
+                }
+            }
 		};
 		this.schedule(this.countDownCallBack,1);
     },
@@ -199,7 +214,7 @@ cc.Class({
 
 			let prefabItem = cc.instantiate(this.prefabItem);
             prefabItem.parent = this.itemContent;
-            
+            prefabItem.active = false;
             //这个地方注意下预制体的结构，自己获取要去监听的部分
 			prefabItem.getChildByName("invitebtn").on(cc.Node.EventType.TOUCH_END, function(touchEvent){
 				let index = prefabItem.physicalLocation;
@@ -212,7 +227,7 @@ cc.Class({
     },
 
     update (dt) {
-		this.scrollveiwDidScrolled();
+		this._scrollveiwDidScrolled();
 	},
 	
     /**
@@ -231,9 +246,6 @@ cc.Class({
         
         //请求新的数据
         this.getData();
-
-        //清空下线数据，增加新上线数据
-        this.updatePrefabData();
     },
 
     initCountDownLeftTimeArr(){
@@ -259,80 +271,52 @@ cc.Class({
 		//先装载数据
         for(var i = 0; i < this.randomLength; i ++) {
 			this.prefabData.push(i);
-		}
+        }
+
+        //获取新数据，更新数据
+        this.updatePrefabData();
     },
 
-    //更新数据
+    //更新数据 这个地方自己去处理数据
     updatePrefabData(){
-        //保留旧的计时
-		if(!this.countDownLeftTime.length){
-            this.initCountDownLeftTimeArr();
-            return;
-        }
         
-        //最新的数据中筛选上次还在线的玩家，存到tempArr这个里
-        var tempArr = [];
+        //每次都替换，然后从大的存好了的数据里进行替换对象
+        this.initCountDownLeftTimeArr();      
 
-        //存储上一次的数据的名字集合
-        var nameArr = []; 
+       //首次进入
+       if(!cc.jsInstance.countDownLeftTime){
+           cc.jsInstance.countDownLeftTime = this.countDownLeftTime.slice(0);
+       }else{
 
-        //最新数据的名字集合
-        var newNameArr = [];
-
-        nameArr = this.setNameArr(nameArr);
-
-        tempArr = this.setTempArr(nameArr,tempArr);
-
-        //存的是tempArr里面对象的名字
-        newNameArr = this.setNewNameArr(tempArr,newNameArr);
-
-        //最新的数据里上次还在的玩家
-        this.countDownLeftTime = tempArr.slice(0);
-        
-        //prefabData 包含 this.countDownLeftTime数据
-        this.addNewDataToCountDownLeftTime(newNameArr);
-		
-    },
-
-    addNewDataToCountDownLeftTime(newNameArr){
-        for(var i = 0; i < this.prefabData.length;i++){
-            var newTempData = this.prefabData[i];
-            //旧数据
-            if(newNameArr.indexOf(newTempData.name)>=0){
-                continue;
-            }
-
-            //新数据
-            var temp ={
-                name:i,
-                time:120,
-                isClicked:false,
-            }
-            this.countDownLeftTime.push(temp);
-        }
+           //所有的名字数组
+           var allNames = [];
+           allNames = this.setNameArr(allNames);
+           //如果总的数据里面有这个数据，那么countDownlefttime中的数据直接从数据里面取就好了
+           //如果没有，那么更新总的数据库 ，不用替换
+           for(var i = 0; i < this.countDownLeftTime.length;i++){
+               var item = this.countDownLeftTime[i];
+               var index = allNames.indexOf(item.name);
+               if(index >= 0){
+                   var oldItem = cc.jsInstance.countDownLeftTime[index];
+                   this.countDownLeftTime[i] = oldItem;
+               }else{
+                   cc.jsInstance.countDownLeftTime.push(item);
+               }
+           }
+       }
+       this.reLoadData(0);
     },
 
     setNameArr(nameArr){
-        for(var i = 0; i < this.countDownLeftTime.length;i++){
-            var item = this.countDownLeftTime[i];
+        for(var i = 0; i < cc.jsInstance.countDownLeftTime.length;i++){
+            var item = cc.jsInstance.countDownLeftTime[i];
             nameArr.push(item.name);
         }
         return nameArr
     },
 
-    setTempArr(nameArr,tempArr){
-        for(var i = 0; i < this.prefabData.length;i++){
-            var nameTemp = this.prefabData[i];
-            var index = nameArr.indexOf(nameTemp);
-            if(index>=0){
-                var item = this.countDownLeftTime[index];
-                tempArr.push(item);
-            }
-        }
-        return tempArr;
-    },
 
-    setNewNameArr(tempArr,newNameArr){
+    _setNewNameArr(tempArr,newNameArr){
         for(var i = 0; i < tempArr.length;i++){
             var nameTemp = tempArr[i];
             newNameArr.push(nameTemp.name);
