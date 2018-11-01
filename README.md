@@ -1,11 +1,16 @@
 # luckPrefab
 
 ##【功能介绍】
+
     luckPrefab是一个仿照了ios的复用机制使用js来实现的一个可邀请好友的滚动列表。
     动态加载数据，使用有限个item来实现n个数据的滚动展示item的数量是屏幕高度比上item的高度加一。并且两个计时器实现n组数据邀请之后可再次邀请时间间隔的倒计时。
+    
 ##【开发环境】
+
     cocos creator 1.8.2
+    
 ##【demo结构简介】
+
     prefab.js文件
     这三个需要分别挂载在相应的节点上。
 
@@ -78,6 +83,7 @@ itemScrollView对应的节点的scrollview组件下的scorll event绑定方法
     },
     '''
 ##【联系方式】
+
 欢迎一起交流
 QQ:2622030812
 邮箱:2622030812@qq.com
